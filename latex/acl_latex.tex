@@ -2,7 +2,7 @@
 
 % Change "review" to "final" to generate the final (sometimes called camera-ready) version.
 % Change to "preprint" to generate a non-anonymous version with page numbers.
-\usepackage[preprint]{acl}  % SemEval: non-anonymous submission
+\usepackage[final]{acl}  % SemEval: non-anonymous submission
 
 % Standard package includes
 \usepackage{times}
@@ -38,7 +38,7 @@
 
 \title{PFW at SemEval-2026 Task 6: Multi-Seed DeBERTa Ensembles for Political Response Clarity and Evasion Classification}
 
-\author{Taleef Tamsal\thanks{Our official submissions appear under the participant name ``taleef'' on the Codabench leaderboard.} \\
+\author{Taleef Tamsal\thanks{Our official submissions appear under the participant name ``taleef'' on the Codabench and task page leaderboards.} \\
   Purdue University Fort Wayne \\
   \texttt{tamst01@pfw.edu}}
 
@@ -52,7 +52,7 @@
 This paper describes the PFW system for SemEval-2026 Task~6 (CLARITY), which addresses the classification of response clarity and evasion techniques in political interview question-answer pairs.
 Rather than relying on large language model prompting, we pursue a competitive non-LLM approach: fine-tuning DeBERTa-xlarge and DeBERTa-v3-large with a multi-seed ensemble strategy, where 5-fold cross-validation with 10 random seeds yields 50 models per architecture combined via simple logit averaging.
 Our system achieves a macro F1 of 0.76 on Subtask~1 (clarity-level classification) and 0.50 on Subtask~2 (evasion-type classification).
-Notably, post-hoc optimization techniques---including learned ensemble weights, threshold calibration, and hierarchical masking---that consistently improved out-of-fold performance \emph{degraded} evaluation scores by 0.02--0.10 F1, revealing an optimization paradox that highlights the risk of overfitting to cross-validation predictions when evaluation data is limited.
+Notably, post-hoc optimization techniques, including learned ensemble weights, threshold calibration, and hierarchical masking, that consistently improved out-of-fold performance \emph{degraded} evaluation scores by 0.02--0.10 F1, revealing an optimization paradox that highlights the risk of overfitting to cross-validation predictions when evaluation data is limited.
 Our code is publicly available at \url{https://github.com/Taleef7/semeval-2026-task6}.
 \end{abstract}
 
@@ -61,13 +61,13 @@ Our code is publicly available at \url{https://github.com/Taleef7/semeval-2026-t
 % ============================================================
 \section{Introduction}
 
-Political question evasion---the practice of providing answers that deflect, dodge, or otherwise fail to address the substance of a question---is a pervasive phenomenon in political discourse that has been studied extensively in political science and communication research \citep{bull2003microanalysis, clayman2001answers, harris1991evasive}. Automatically detecting and classifying such evasion is important for media accountability and computational political science, yet it remains challenging due to the subtle, context-dependent nature of evasive language.
+Political question evasion, the practice of providing answers that deflect, dodge, or otherwise fail to address the substance of a question, is a pervasive phenomenon in political discourse that has been studied extensively in political science and communication research \citep{bull2003microanalysis, clayman2001answers, harris1991evasive}. Automatically detecting and classifying such evasion is important for media accountability and computational political science, yet it remains challenging due to the subtle, context-dependent nature of evasive language.
 
 SemEval-2026 Task~6, CLARITY \citep{semeval2026task6}, formalizes this problem as two classification tasks over the QEvasion dataset \citep{thomas2024clarity}: \textbf{Subtask~1} classifies responses into three clarity levels (\textit{Clear Reply}, \textit{Ambivalent}, \textit{Clear Non-Reply}), while \textbf{Subtask~2} assigns one of nine fine-grained evasion types. Both are evaluated using macro F1, demanding balanced performance despite severe class imbalance (13$\times$ ratio between the largest and smallest classes in Subtask~2).
 
 Our approach deliberately avoids LLM-based prompting strategies and instead demonstrates that \textbf{smaller, fine-tuned encoder models} can achieve competitive performance through effective ensembling. We train 50 models per architecture (DeBERTa-xlarge, 900M; DeBERTa-v3-large, 304M) using different random seeds and aggregate via simple logit averaging. This design philosophy prioritizes \textbf{accessibility and reproducibility}: our largest model is under 1B parameters, runs on a single GPU, and requires no API access or proprietary LLM inference, making it practical for researchers with limited computational budgets. The multi-seed strategy is motivated by the well-documented instability of fine-tuning large pre-trained language models \citep{dodge2020finetuning}, where individual models vary by up to 0.10 F1 purely due to random seed differences.
 
-Our system achieves macro F1 of \textbf{0.76} (Subtask~1) and \textbf{0.50} (Subtask~2). Beyond these results, the primary scientific contribution of this paper is what we term the \textbf{optimization paradox}: three independent post-hoc calibration techniques---each tuned on out-of-fold (OOF) predictions---consistently improved OOF metrics but degraded evaluation scores by 0.02--0.10 F1. We formalize this as a distinction between \textit{model-level} interventions (multi-seed ensembling, which transfers) and \textit{prediction-level} interventions (post-hoc calibration, which overfits), offering a practical guideline for shared task participants working with limited evaluation data. Our error analysis further reveals that Subtask~2 difficulty is driven by semantic overlap between evasion categories and extreme class imbalance, with four minority classes achieving F1 below 0.27.
+Our system achieves macro F1 of \textbf{0.76} (Subtask~1) and \textbf{0.50} (Subtask~2). Beyond these results, the primary scientific contribution of this paper is what we term the \textbf{optimization paradox}: three independent post-hoc calibration techniques, each tuned on out-of-fold (OOF) prediction, consistently improved OOF metrics but degraded evaluation scores by 0.02--0.10 F1. We formalize this as a distinction between \textit{model-level} interventions (multi-seed ensembling, which transfers) and \textit{prediction-level} interventions (post-hoc calibration, which overfits), offering a practical guideline for shared task participants working with limited evaluation data. Our error analysis further reveals that Subtask~2 difficulty is driven by semantic overlap between evasion categories and extreme class imbalance, with four minority classes achieving F1 below 0.27.
 
 % ============================================================
 % 2. BACKGROUND
@@ -148,7 +148,7 @@ We train 50 models per architecture via 5-fold stratified cross-validation $\tim
 \hat{y} = \arg\max_c \frac{1}{M} \sum_{m=1}^{M} z_m^{(c)}
 \label{eq:ensemble}
 \end{equation}
-where $z_m^{(c)}$ is the logit for class $c$ from model $m$ and $M{=}50$. This is motivated by the high variance across seeds: in our DeBERTa-v3-large baseline experiments on Subtask~1 (before selecting xlarge as the final T1 architecture), individual models ranged from 0.601 to 0.698 macro F1 ($\sigma{=}0.024$)---a spread of nearly 0.10 purely from random initialization.
+where $z_m^{(c)}$ is the logit for class $c$ from model $m$ and $M{=}50$. This is motivated by the high variance across seeds: in our DeBERTa-v3-large baseline experiments on Subtask~1 (before selecting xlarge as the final T1 architecture), individual models ranged from 0.601 to 0.698 macro F1 ($\sigma{=}0.024$), which is a spread of nearly 0.10 purely from random initialization.
 
 Subtask~1 and~2 predictions are made \textbf{independently}: we do not condition Subtask~2 on Subtask~1 outputs, as hierarchical conditioning amplified cascading errors (Section~\ref{sec:paradox}).
 
@@ -168,7 +168,7 @@ All models share identical hyperparameters: learning rate $2{\times}10^{-5}$ wit
 
 Table~\ref{tab:results} presents our development baselines, ensemble results, and official evaluation scores. On the official leaderboard,\footnote{Leaderboard snapshot accessed March~1, 2026: \url{https://konstantinosftw.github.io/CLARITY-SemEval-2026/}} our system placed \textbf{18th of 41 participants} on Subtask~1 (macro F1~=~0.76) and \textbf{12th of 33 participants} on Subtask~2 (macro F1~=~0.50). The top-performing system (TeleAI) achieved 0.89 and 0.68 on Subtasks~1 and~2 respectively.
 
-The 50-model DeBERTa-v3-large ensemble improves over the single-model mean by +0.024 on Subtask~1 OOF (0.667 vs.\ 0.643) and +0.046 on Subtask~2 OOF (0.373 vs.\ 0.327). For DeBERTa-xlarge on Subtask~1---our final submission architecture---the 50-model ensemble improves from 0.663~$\pm$~0.021 to 0.679 (+0.016 OOF). The notably higher evaluation F1 relative to OOF for Subtask~1 (0.76 vs.\ 0.679) could reflect sampling noise in the small 237-sample evaluation set and/or distributional differences between training and evaluation interviews.
+The 50-model DeBERTa-v3-large ensemble improves over the single-model mean by +0.024 on Subtask~1 OOF (0.667 vs.\ 0.643) and +0.046 on Subtask~2 OOF (0.373 vs.\ 0.327). For DeBERTa-xlarge on Subtask~1, our final submission architecture, the 50-model ensemble improves from 0.663~$\pm$~0.021 to 0.679 (+0.016 OOF). The notably higher evaluation F1 relative to OOF for Subtask~1 (0.76 vs.\ 0.679) could reflect sampling noise in the small 237-sample evaluation set and/or distributional differences between training and evaluation interviews.
 
 \begin{table}[t]
 \centering
@@ -181,11 +181,11 @@ The 50-model DeBERTa-v3-large ensemble improves over the single-model mean by +0
 \quad Majority class & 0.248 & 0.052 \\
 \quad TF-IDF + LR & 0.546 & 0.319 \\
 \quad v3-large (single model) & $.643{\pm}.024$ & $.327{\pm}.040$ \\
-\quad xlarge (single model) & $.663{\pm}.021$ & --- \\
+\quad xlarge (single model) & $.663{\pm}.021$ & -- \\
 \midrule
 \multicolumn{3}{l}{\textit{Our ensembles (OOF)}} \\
 \quad v3-large (50 models) & 0.667 & 0.373 \\
-\quad xlarge (50 models) & 0.679 & --- \\
+\quad xlarge (50 models) & 0.679 & -- \\
 \midrule
 \multicolumn{3}{l}{\textit{Official evaluation}} \\
 \quad Single-seed v3-large & 0.54 & 0.50 \\
@@ -242,7 +242,7 @@ We identify a key distinction: the multi-seed ensemble is a \textit{model-level}
 \label{sec:errors}
 
 \paragraph{Subtask~1: The Ambivalent Boundary Problem.}
-The primary difficulty in Subtask~1 is distinguishing \textit{Ambivalent} from \textit{Clear Reply}: these two classes account for 734 of 986 total OOF errors (74.4\%). This confusion reflects a genuine annotation challenge---many political responses begin with a superficially direct statement but embed hedging or topic shifts. For example, the response \textit{``No. I think we're going to be strategic partners''} to a question about U.S.-China relations was annotated as \textit{Ambivalent} (the initial ``No'' contradicts the subsequent positive framing), but our model predicts \textit{Clear Reply} with 0.605 confidence, likely due to the unambiguous ``No'' token. This suggests that detecting \textit{pragmatic} evasion (where surface-level directness masks substantive non-answers) remains a core challenge.
+The primary difficulty in Subtask~1 is distinguishing \textit{Ambivalent} from \textit{Clear Reply}: these two classes account for 734 of 986 total OOF errors (74.4\%). This confusion reflects a genuine annotation challenge since many political responses begin with a superficially direct statement but embed hedging or topic shifts. For example, the response \textit{``No. I think we're going to be strategic partners''} to a question about U.S.-China relations was annotated as \textit{Ambivalent} (the initial ``No'' contradicts the subsequent positive framing), but our model predicts \textit{Clear Reply} with 0.605 confidence, likely due to the unambiguous ``No'' token. This suggests that detecting \textit{pragmatic} evasion (where surface-level directness masks substantive non-answers) remains a core challenge.
 
 \paragraph{Subtask~2: Majority-Class Collapse.}
 
@@ -276,14 +276,14 @@ The primary difficulty in Subtask~1 is distinguishing \textit{Ambivalent} from \
 
 Table~\ref{tab:per_class} reveals that Subtask~2 errors follow a systematic pattern: the model misclassifies minority evasion types as the dominant \textit{Explicit} class (188 \textit{Implicit}, 139 \textit{General}, 115 \textit{Dodging}, and 110 \textit{Deflection} samples). This ``majority-class collapse'' is most extreme for \textit{Partial/half-answer} (79 training samples, F1=0.00), which is never predicted. The pattern suggests that standard cross-entropy training is insufficient for this extreme imbalance; techniques such as focal loss \citep{lin2017focal}, class-balanced sampling, or inverse-frequency class weighting would be natural interventions. We did not explore these during the evaluation phase due to time constraints and the risk that retraining could affect our already-submitted Subtask~1 scores, but they represent a clear avenue for improvement.
 
-Interestingly, \textit{Clarification} achieves the highest F1 (0.655) despite being a minority class (92 samples), likely because clarification responses have a distinctive linguistic structure (asking questions back). In contrast, \textit{General} (F1=0.136) and \textit{Deflection} (F1=0.234) are semantically close to \textit{Dodging}, differing primarily in the \textit{intent} behind the evasion rather than its surface form---a distinction that may require discourse-level reasoning beyond what token-level classifiers can capture.
+Interestingly, \textit{Clarification} achieves the highest F1 (0.655) despite being a minority class (92 samples), likely because clarification responses have a distinctive linguistic structure (asking questions back). In contrast, \textit{General} (F1=0.136) and \textit{Deflection} (F1=0.234) are semantically close to \textit{Dodging}, differing primarily in the \textit{intent} behind the evasion rather than its surface form, which is a distinction that may require discourse-level reasoning beyond what token-level classifiers can capture.
 
 % ============================================================
 % CONCLUSION
 % ============================================================
 \section{Conclusion}
 
-We presented a multi-seed DeBERTa ensemble system for SemEval-2026 Task~6 (CLARITY), achieving macro F1 scores of 0.76 and 0.50 on Subtasks~1 and~2 respectively. Our \emph{optimization paradox} finding---that model-level ensembling substantially improved Subtask~1 and did not harm Subtask~2, whereas prediction-level post-hoc calibrations regressed both---offers a practical recommendation for shared task participants: when evaluation data is limited, invest in training more diverse models rather than optimizing fixed predictions. Our error analysis suggests that the primary challenges in evasion classification are the \textit{Ambivalent}/\textit{Clear Reply} semantic boundary in Subtask~1 and majority-class collapse in the long-tailed Subtask~2 distribution.
+We presented a multi-seed DeBERTa ensemble system for SemEval-2026 Task~6 (CLARITY), achieving macro F1 scores of 0.76 and 0.50 on Subtasks~1 and~2 respectively. Our \emph{optimization paradox} finding, that model-level ensembling substantially improved Subtask~1 and did not harm Subtask~2 whereas prediction-level post-hoc calibrations regressed both, offers a practical recommendation for shared task participants: when evaluation data is limited, invest in training more diverse models rather than optimizing fixed predictions. Our error analysis suggests that the primary challenges in evasion classification are the \textit{Ambivalent}/\textit{Clear Reply} semantic boundary in Subtask~1 and majority-class collapse in the long-tailed Subtask~2 distribution.
 
 % ============================================================
 % LIMITATIONS  (ACL: must appear after Conclusion, before References)
@@ -299,7 +299,7 @@ Our optimization paradox analysis rests on three submissions per subtask; additi
 % ============================================================
 \section*{Ethics Statement}
 
-Automated classification of political speech carries both social value and risk. On the beneficial side, tools like ours can support media accountability, debate analysis, and political communication research by making evasion patterns more visible and measurable. However, there are potential harms that practitioners should consider. First, classifier errors---particularly the confusion between \textit{Ambivalent} and \textit{Clear Reply} that we document---can mischaracterize a politician's response; such errors should not be presented to end users as definitive judgments. Second, like any classification system, our model may inherit biases from its training data, which covers primarily U.S.\ political interviews and may not generalize to other political cultures, languages, or communication styles. We release our code to enable independent scrutiny and encourage researchers building on this work to validate system outputs with human reviewers before using them in high-stakes contexts.
+Automated classification of political speech carries both social value and risk. On the beneficial side, tools like ours can support media accountability, debate analysis, and political communication research by making evasion patterns more visible and measurable. However, there are potential harms that practitioners should consider. First, classifier errors, particularly the confusion between \textit{Ambivalent} and \textit{Clear Reply} that we document, can mischaracterize a politician's response; such errors should not be presented to end users as definitive judgments. Second, like any classification system, our model may inherit biases from its training data, which covers primarily U.S.\ political interviews and may not generalize to other political cultures, languages, or communication styles. We release our code to enable independent scrutiny and encourage researchers building on this work to validate system outputs with human reviewers before using them in high-stakes contexts.
 
 % ============================================================
 % ACKNOWLEDGMENTS
