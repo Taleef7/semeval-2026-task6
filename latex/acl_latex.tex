@@ -76,7 +76,7 @@ Our system achieves macro F1 of \textbf{0.76} (Subtask~1) and \textbf{0.50} (Sub
 
 \subsection{Task and Dataset}
 
-The CLARITY shared task follows the two-level taxonomy from \citet{thomas2024isaidthatdataset}. At the coarse level, responses are categorized as \textit{Clear Reply}, \textit{Ambivalent}, or \textit{Clear Non-Reply}. At the fine-grained level, nine evasion types (e.g., \textit{Dodging}, \textit{Deflection}, \textit{Implicit}) each map to exactly one clarity level. The QEvasion dataset \citep{thomas2024clarity} contains 3,448 English question-answer pairs from political interviews, annotated using a combination of GPT-3.5 and human annotators. The held-out evaluation set contains 237 samples. Table~\ref{tab:class_dist} shows the training distribution: \textit{Ambivalent} dominates Subtask~1 (59.2\%), while Subtask~2 is severely long-tailed, with \textit{Partial/half-answer} comprising only 2.3\% of samples.
+The CLARITY shared task follows the two-level taxonomy from \citet{thomas2024clarity}. At the coarse level, responses are categorized as \textit{Clear Reply}, \textit{Ambivalent}, or \textit{Clear Non-Reply}. At the fine-grained level, nine evasion types (e.g., \textit{Dodging}, \textit{Deflection}, \textit{Implicit}) each map to exactly one clarity level. The QEvasion dataset \citep{thomas2024clarity} contains 3,448 English question-answer pairs from political interviews, annotated using a combination of GPT-3.5 and human annotators. The held-out evaluation set contains 237 samples. Table~\ref{tab:class_dist} shows the training distribution: \textit{Ambivalent} dominates Subtask~1 (59.2\%), while Subtask~2 is severely long-tailed, with \textit{Partial/half-answer} comprising only 2.3\% of samples.
 
 \begin{table}[t]
 \centering
