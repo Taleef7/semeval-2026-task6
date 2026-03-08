@@ -1,0 +1,11 @@
+torch>=2.0
+transformers>=4.36
+datasets>=2.16
+accelerate>=0.25
+scikit-learn>=1.3
+numpy>=1.24
+pandas>=1.5
+tqdm
+sentencepiece
+matplotlib
+seaborn
