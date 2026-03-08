@@ -1,0 +1,67 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.venv/
+
+# Caches
+.cache/
+hf_cache/
+
+# Training outputs (large)
+/runs/
+/models/
+/checkpoints/
+/outputs/
+*.pt
+*.ckpt
+*.safetensors
+
+# Artifacts (OOF logits, splits, etc.)
+/artifacts/
+
+# Logs
+/logs/
+*.log
+
+# Submissions
+/submissions/
+
+# Data files
+/data/
+*.csv
+*.jsonl
+*.parquet
+*.npy
+
+# Large / binary
+*.pdf
+*.zip
+
+# OS / editor
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Environment
+.env
+.env.local
+
+# LaTeX build artifacts
+latex/*.aux
+latex/*.bbl
+latex/*.blg
+latex/*.fdb_latexmk
+latex/*.fls
+latex/*.out
+latex/*.synctex.gz
+latex/*.bak
