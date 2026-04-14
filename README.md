@@ -1,140 +1,192 @@
 # PFW at SemEval-2026 Task 6: Multi-Seed DeBERTa Ensembles for Political Response Clarity and Evasion Classification
 
-This repository contains the code for our system submission to [SemEval-2026 Task 6 (CLARITY)](https://konstantinosftw.github.io/CLARITY-SemEval-2026/), which addresses the classification of response clarity and evasion techniques in political interview question-answer pairs.
+[![Task](https://img.shields.io/badge/SemEval--2026-Task%206-blue)](https://konstantinosftw.github.io/CLARITY-SemEval-2026/)
+[![Paper](https://img.shields.io/badge/Paper-PDF-red)](latex/acl_latex.pdf)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-## System Overview
+Official code and paper source for the **PFW** submission to [SemEval-2026 Task 6 (CLARITY)](https://konstantinosftw.github.io/CLARITY-SemEval-2026/). Our system placed **18/41** on Subtask 1 (Clarity) and **12/33** on Subtask 2 (Evasion). The paper has been accepted for presentation at SemEval-2026.
 
-Our approach fine-tunes DeBERTa-xlarge (900M) and DeBERTa-v3-large (304M) with a multi-seed ensemble strategy:
-- **5-fold cross-validation** with **10 random seeds** yields **50 models** per architecture
-- Predictions are combined via **simple logit averaging**
-- No LLM prompting or API calls required — runs on a single GPU
+> **Tamsal, T. and Rusert, J. (2026).** *PFW at SemEval-2026 Task 6: Multi-Seed DeBERTa Ensembles for Political Response Clarity and Evasion Classification.* In Proceedings of the 20th International Workshop on Semantic Evaluation (SemEval-2026), ACL.
 
-### Results
+---
 
-| System | Subtask 1 (Clarity) | Subtask 2 (Evasion) |
-|--------|:---:|:---:|
-| Majority class baseline | 0.248 | 0.052 |
+## System at a Glance
+
+| | Subtask 1 (3-way Clarity) | Subtask 2 (9-way Evasion) |
+|---|:---:|:---:|
+| Architecture | DeBERTa-xlarge (900M) | DeBERTa-v3-large (304M) |
+| Ensemble | 5 folds × 10 seeds = **50 models** | 5 folds × 10 seeds = **50 models** |
+| Aggregation | Simple logit averaging | Simple logit averaging |
+| **Macro F1 (official eval)** | **0.76** (18/41) | **0.50** (12/33) |
+
+No LLM prompting or API access is required; the largest model is under 1B parameters and runs on a single A100 GPU.
+
+### Baseline comparison (OOF / eval macro F1)
+
+| System | T1 | T2 |
+|---|:---:|:---:|
+| Majority class | 0.248 | 0.052 |
 | TF-IDF + Logistic Regression | 0.546 | 0.319 |
-| DeBERTa-v3-large (single model) | 0.643 ± 0.024 | 0.327 ± 0.040 |
-| DeBERTa-xlarge (single model) | 0.663 ± 0.021 | — |
-| **Multi-seed ensemble (ours)** | **0.76** (18/41) | **0.50** (12/33) |
+| ChatGPT zero-shot *(Thomas et al., 2024)* | 0.413 | 0.244 |
+| DeBERTa-base fine-tuned *(Thomas et al., 2024)* | 0.441 | – |
+| RoBERTa-base fine-tuned *(Thomas et al., 2024)* | 0.530 | – |
+| XLNet-base fine-tuned *(Thomas et al., 2024)* | 0.518 | – |
+| DeBERTa-v3-large (single seed, ours) | 0.643 ± 0.024 | 0.327 ± 0.040 |
+| DeBERTa-xlarge (single seed, ours) | 0.663 ± 0.021 | – |
+| **Multi-seed ensemble (ours) — official eval** | **0.76** | **0.50** |
 
-Macro F1 scores. Rank on official leaderboard in parentheses.
+See `latex/acl_latex.pdf` for full results and analysis.
 
-## Project Structure
+### Key finding — the Optimization Paradox
+
+Three independent post-hoc optimization strategies (learned ensemble weights, per-class thresholds, and hierarchical masking) each *improved* out-of-fold (OOF) macro F1 but *degraded* official evaluation scores by 0.02–0.10. We document this as an **optimization paradox**: with limited evaluation data (237 samples), *model-level* interventions (seed diversity) transfer robustly, whereas *prediction-level* interventions (post-hoc calibration) overfit OOF artifacts. See Section 5.3 of the paper.
+
+---
+
+## Repository Layout
 
 ```
+.
+├── latex/                          # Camera-ready paper source and PDF
+│   ├── acl_latex.tex               # ACL-format paper
+│   ├── acl_latex.pdf               # Compiled PDF
+│   ├── custom.bib                  # Bibliography
+│   ├── acl.sty                     # ACL template style
+│   └── acl_natbib.bst              # ACL bibliography style
+├── docs/
+│   ├── methodology_report.md       # Extended methodology notes
+│   └── paper_figures/              # Paper figures (PDF+PNG) and result tables (CSV/JSON)
 ├── src/
-│   ├── training/           # Training scripts
-│   │   ├── train_10seed.py          # Primary: unified multi-seed training (Task 1 & 2)
-│   │   ├── train_v3large_task1.py   # v3-large Task 1 training
-│   │   ├── train_v3large_task2.py   # v3-large Task 2 training
-│   │   ├── train_task1_xlarge.py    # xlarge Task 1 training
-│   │   └── train_utils.py           # Shared training utilities
-│   ├── models/
-│   │   └── encoder_classifier.py    # DeBERTa encoder-classifier architecture
-│   ├── data/
-│   │   ├── load_dataset.py          # HuggingFace data loading
-│   │   ├── preprocess.py            # Text preprocessing & label normalization
-│   │   ├── splits.py                # GroupKFold CV split generation
-│   │   └── stratified_group_kfold.py
-│   ├── metrics/
-│   │   ├── compute_metrics.py       # Macro F1 computation
-│   │   └── local_test_scorer.py     # Local evaluation scorer
-│   └── submission/
-│       ├── make_prediction_file.py  # Single-model predictions
-│       ├── make_prediction_file_ensemble.py  # Ensemble predictions
-│       └── zip_submission.py        # Submission packaging
+│   ├── data/                       # Dataset loading, preprocessing, CV splits
+│   ├── models/                     # DeBERTa encoder-classifier architecture
+│   ├── training/                   # Training loops (multi-seed, per-architecture)
+│   ├── metrics/                    # Macro-F1 scorer and local evaluation harness
+│   └── submission/                 # Prediction-file and submission-zip helpers
 ├── scripts/
-│   ├── generate_final_ensemble.py   # Final ensemble inference pipeline
-│   ├── generate_simple_ensemble.py  # Simple logit-averaging ensemble
-│   ├── paper_baselines.py           # Reproduce paper baselines
-│   ├── paper_analysis.py            # Generate paper figures and tables
-│   ├── build_oof_logits.py          # Build OOF logit matrices
-│   ├── collect_task1_oof.py         # OOF collection for Task 1
-│   ├── collect_v3large_oof.py       # OOF collection for v3-large
-│   ├── eval_task1_predictions.py    # Task 1 evaluation
-│   ├── eval_task2_predictions.py    # Task 2 evaluation
-│   ├── local_eval.py               # Local evaluation harness
-│   └── slurm/                       # SLURM job scripts for HPC
-├── latex/                           # Paper source (ACL format)
-├── docs/                            # Documentation and paper figures
-└── requirements.txt
+│   ├── collect_task1_oof.py        # OOF-logit collection (Task 1, xlarge)
+│   ├── collect_v3large_oof.py      # OOF-logit collection (both tasks, v3-large)
+│   ├── build_oof_logits.py         # OOF-matrix utilities
+│   ├── generate_final_ensemble.py  # End-to-end inference → submission
+│   ├── generate_simple_ensemble.py # Reference logit-averaging ensemble
+│   ├── eval_task1_predictions.py   # Local T1 scorer
+│   ├── eval_task2_predictions.py   # Local T2 scorer
+│   ├── local_eval.py               # Combined local evaluator
+│   ├── paper_baselines.py          # Reproduce majority / TF-IDF baselines
+│   ├── paper_analysis.py           # Regenerate figures and result tables
+│   └── slurm/                      # SLURM job scripts for an HPC workflow
+├── requirements.txt
+├── CITATION.cff
+├── LICENSE
+└── README.md
 ```
+
+Everything outside this tree (raw data, checkpoints, OOF logits, training logs, submission archives) is produced by the training pipeline and gitignored.
+
+---
 
 ## Reproduction
 
-### Requirements
+### Environment
 
-- Python 3.9+
-- PyTorch 2.0+ with CUDA support
-- 1x NVIDIA A100 (80GB) recommended; runs on any GPU with >= 24GB
+- Python 3.9+ with PyTorch 2.0+ (CUDA 12.1)
+- 1× NVIDIA A100-80GB recommended for DeBERTa-xlarge; a 24 GB card is sufficient for DeBERTa-v3-large
+- Estimated compute for the full 100-model campaign: ~50 GPU-hours
 
 ```bash
+python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
 ### Data
 
-The QEvasion dataset is loaded automatically from HuggingFace:
+The QEvasion dataset (Thomas et al., 2024) is loaded from the HuggingFace Hub:
+
 ```python
 from datasets import load_dataset
 dataset = load_dataset("ailsntua/QEvasion")
 ```
 
-### Training
+The official SemEval-2026 evaluation set is distributed via the task organizers and is not included in this repository.
 
-**Step 1: Generate cross-validation splits**
+### Training pipeline
+
+**1. Generate stratified 5-fold splits** (writes to `artifacts/splits/`):
+
 ```bash
 python src/data/splits.py
 ```
 
-**Step 2: Train multi-seed models (example: Task 1, xlarge)**
+**2. Train one fold × one seed** — primary entry point:
+
 ```bash
-# Single fold + seed
 python src/training/train_10seed.py \
     --task 1 --fold 0 --seed 42 \
     --model_name microsoft/deberta-xlarge \
-    --epochs 6 --lr 1e-5 --label_smoothing 0.03
-
-# Or submit all fold x seed combinations via SLURM
-sbatch scripts/slurm/task1_10seed.sbatch
+    --epochs 3 --lr 2e-5
 ```
 
-**Step 3: Collect OOF logits**
+For the full 50-model ensemble per architecture, submit the provided SLURM arrays:
+
 ```bash
-python scripts/collect_task1_oof.py
+sbatch scripts/slurm/task1_10seed.sbatch    # Task 1, all (fold × seed) combos
+sbatch scripts/slurm/task2_10seed.sbatch    # Task 2, all (fold × seed) combos
 ```
 
-**Step 4: Generate ensemble predictions**
+**3. Collect OOF logits:**
+
 ```bash
-python scripts/generate_simple_ensemble.py
+python scripts/collect_task1_oof.py          # xlarge → Task 1
+python scripts/collect_v3large_oof.py        # v3-large → Tasks 1 & 2
 ```
 
-### Evaluation
+**4. Generate ensemble predictions:**
+
+```bash
+python scripts/generate_simple_ensemble.py   # logit averaging (no calibration)
+```
+
+**5. Evaluate locally:**
 
 ```bash
 python scripts/local_eval.py --task 1 --prediction_file submissions/task1_prediction
 python scripts/local_eval.py --task 2 --prediction_file submissions/task2_prediction
 ```
 
+### Regenerating paper artifacts
+
+```bash
+python scripts/paper_baselines.py    # majority-class and TF-IDF baselines
+python scripts/paper_analysis.py     # figures and result tables in docs/paper_figures/
+```
+
+### Building the paper
+
+```bash
+cd latex
+pdflatex acl_latex && bibtex acl_latex && pdflatex acl_latex && pdflatex acl_latex
+```
+
+The camera-ready PDF compiles cleanly under the ACL 2026 style, passes `aclpubcheck --paper_type long`, and fits the 6-page main-body limit.
+
+---
+
 ## Task Description
 
-SemEval-2026 Task 6 ([CLARITY](https://konstantinosftw.github.io/CLARITY-SemEval-2026/)) addresses political question evasion detection:
+SemEval-2026 Task 6 ([CLARITY](https://konstantinosftw.github.io/CLARITY-SemEval-2026/)) addresses political question evasion detection over the [QEvasion](https://huggingface.co/datasets/ailsntua/QEvasion) dataset:
 
-- **Subtask 1**: Classify responses into 3 clarity levels (*Clear Reply*, *Ambivalent*, *Clear Non-Reply*)
-- **Subtask 2**: Classify into 9 fine-grained evasion types (*Explicit*, *Dodging*, *Deflection*, etc.)
+- **Subtask 1**: 3-way clarity classification — *Clear Reply* / *Ambivalent* / *Clear Non-Reply*
+- **Subtask 2**: 9-way evasion-type classification — *Explicit*, *Dodging*, *Deflection*, *Implicit*, *General*, *Partial/half-answer*, *Claims ignorance*, *Declining to answer*, *Clarification*
 
-Both are evaluated using macro F1 on the [QEvasion dataset](https://huggingface.co/datasets/ailsntua/QEvasion) (3,448 training / 237 evaluation instances).
+Both subtasks are scored by macro F1 over a 237-sample held-out evaluation set.
+
+---
 
 ## Citation
-
-If you use this code, please cite our paper:
 
 ```bibtex
 @inproceedings{tamsal2026pfw,
   title     = {{PFW} at {SemEval}-2026 Task 6: Multi-Seed {DeBERTa} Ensembles for Political Response Clarity and Evasion Classification},
-  author    = {Tamsal, Taleef},
+  author    = {Tamsal, Taleef and Rusert, Jonathan},
   booktitle = {Proceedings of the 20th International Workshop on Semantic Evaluation (SemEval-2026)},
   year      = {2026},
   publisher = {Association for Computational Linguistics},
@@ -142,6 +194,12 @@ If you use this code, please cite our paper:
 }
 ```
 
+---
+
 ## License
 
-This project is released for research purposes. The QEvasion dataset is subject to its own [license terms](https://huggingface.co/datasets/ailsntua/QEvasion).
+The code in this repository is released under the [MIT License](LICENSE). The QEvasion dataset is governed by its own [license terms](https://huggingface.co/datasets/ailsntua/QEvasion) and is not redistributed here.
+
+## Acknowledgments
+
+We thank the CLARITY task organizers for the QEvasion dataset and the shared task. Computational resources were provided by Purdue University Fort Wayne through the Gilbreth HPC cluster.

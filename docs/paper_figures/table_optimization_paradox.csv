@@ -1,0 +1,7 @@
+Optimization,OOF Δ (T1),Eval Δ (T1),OOF Δ (T2),Eval Δ (T2)
+Single-fold baseline,+0.000,0.54,+0.000,0.50
+Multi-seed ensemble (50 models),+0.012,+0.22 (→0.76),+0.010,0.00 (→0.50)
+Optuna weight optimization,+0.003,−0.02 (→0.74),+0.003,—
+Class threshold calibration,+0.007,—,+0.007,—
+Learned hierarchical masking,—,—,+0.026,−0.10 (→0.40)
+Mega-ensemble (233+ models),+0.001,0.00,+0.001,—

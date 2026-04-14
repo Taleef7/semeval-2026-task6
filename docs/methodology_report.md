@@ -1,5 +1,7 @@
 # SemEval-2026 Task 6: Clarity Classification Methodology Report
 
+> This document supplements the [camera-ready paper](../latex/acl_latex.pdf) with developer-facing notes on the training pipeline, submission history, and the post-hoc optimization strategies that did not transfer from OOF to evaluation. For the formal methodology, error analysis, and discussion of the *optimization paradox*, see the paper.
+
 ## Competition Overview
 
 **Task**: SemEval-2026 Task 6 - Clarity Classification  

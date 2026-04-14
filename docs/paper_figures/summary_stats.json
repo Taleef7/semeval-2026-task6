@@ -1,0 +1,22 @@
+{
+  "t1_xlarge_oof_ensemble_f1": 0.679419787421197,
+  "t1_v3large_oof_ensemble_f1": 0.666929606820541,
+  "t2_v3large_oof_ensemble_f1": 0.3726868720756021,
+  "t1_xlarge_single_model_mean_f1": 0.3109357149156151,
+  "t1_xlarge_single_model_std_f1": 0.01141279563599095,
+  "t1_xlarge_single_model_min_f1": 0.287959149345121,
+  "t1_xlarge_single_model_max_f1": 0.34010883407947706,
+  "eval_scores": {
+    "t1_best": 0.76,
+    "t1_baseline": 0.54,
+    "t1_overoptimized": 0.74,
+    "t2_best": 0.5,
+    "t2_baseline": 0.5,
+    "t2_overoptimized": 0.4
+  },
+  "training_samples": 3448,
+  "eval_samples": 237,
+  "n_models_t1_xlarge": 50,
+  "n_models_t1_v3large": 50,
+  "n_models_t2_v3large": 50
+}

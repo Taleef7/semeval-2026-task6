@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+title: "PFW at SemEval-2026 Task 6: Multi-Seed DeBERTa Ensembles for Political Response Clarity and Evasion Classification"
+message: "If you use this software or reproduce our results, please cite the accompanying paper."
+type: software
+authors:
+  - family-names: Tamsal
+    given-names: Taleef
+    affiliation: Purdue University Fort Wayne
+    email: tamst01@pfw.edu
+  - family-names: Rusert
+    given-names: Jonathan
+    affiliation: Purdue University Fort Wayne
+    email: jrusert@pfw.edu
+repository-code: "https://github.com/Taleef7/semeval-2026-task6"
+license: MIT
+preferred-citation:
+  type: conference-paper
+  title: "PFW at SemEval-2026 Task 6: Multi-Seed DeBERTa Ensembles for Political Response Clarity and Evasion Classification"
+  authors:
+    - family-names: Tamsal
+      given-names: Taleef
+    - family-names: Rusert
+      given-names: Jonathan
+  collection-title: "Proceedings of the 20th International Workshop on Semantic Evaluation (SemEval-2026)"
+  conference:
+    name: "SemEval-2026: The 20th International Workshop on Semantic Evaluation"
+  publisher:
+    name: "Association for Computational Linguistics"
+  year: 2026

@@ -1,0 +1,78 @@
+{
+  "t1_error_rate": 0.28596287703016243,
+  "t2_error_rate": 0.5435034802784223,
+  "t1_top_confusions": [
+    {
+      "true": "Ambivalent",
+      "pred": "Clear Reply",
+      "count": 398
+    },
+    {
+      "true": "Clear Reply",
+      "pred": "Ambivalent",
+      "count": 336
+    },
+    {
+      "true": "Clear Non-Reply",
+      "pred": "Ambivalent",
+      "count": 115
+    },
+    {
+      "true": "Ambivalent",
+      "pred": "Clear Non-Reply",
+      "count": 94
+    },
+    {
+      "true": "Clear Non-Reply",
+      "pred": "Clear Reply",
+      "count": 28
+    },
+    {
+      "true": "Clear Reply",
+      "pred": "Clear Non-Reply",
+      "count": 15
+    }
+  ],
+  "t2_top_confusions": [
+    {
+      "true": "Implicit",
+      "pred": "Explicit",
+      "count": 188
+    },
+    {
+      "true": "General",
+      "pred": "Explicit",
+      "count": 139
+    },
+    {
+      "true": "Dodging",
+      "pred": "Explicit",
+      "count": 115
+    },
+    {
+      "true": "Explicit",
+      "pred": "Implicit",
+      "count": 113
+    },
+    {
+      "true": "Deflection",
+      "pred": "Explicit",
+      "count": 110
+    },
+    {
+      "true": "General",
+      "pred": "Implicit",
+      "count": 102
+    },
+    {
+      "true": "Dodging",
+      "pred": "Implicit",
+      "count": 98
+    },
+    {
+      "true": "Deflection",
+      "pred": "Dodging",
+      "count": 89
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+System,Subtask 1 (Macro F1),Subtask 2 (Macro F1),Data Split
+Majority class,0.2478,0.0520,OOF
+TF-IDF + Logistic Regression,0.5458,0.3186,OOF
+"DeBERTa-xlarge (single model, 1 seed)",0.3109 ± 0.0114,0.3273 ± 0.0396,OOF
+"DeBERTa-v3-large (50 models, OOF)",0.6669,0.3727,OOF
+"DeBERTa-xlarge (50 models, OOF)",0.6794,—,OOF
+DeBERTa-xlarge ensemble (eval),0.76,—,Eval (official)
+DeBERTa-v3-large ensemble T2 (eval),—,0.50,Eval (official)

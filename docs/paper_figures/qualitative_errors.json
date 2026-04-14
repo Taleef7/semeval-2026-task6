@@ -1,0 +1,249 @@
+{
+  "t1_errors": [
+    {
+      "idx": 1138,
+      "question": "Q. Okay. And another question on the big picture of U.S.-China relations: What do you think the U.S. and China should see each other? Are we strategic partners? Are we competitors? Are we enemies? What are we?",
+      "answer": "No. I think we're going to be strategic partners.",
+      "true_label": "Ambivalent",
+      "pred_label": "Clear Reply",
+      "confidence": 0.604853249713507,
+      "president": "Donald J. Trump"
+    },
+    {
+      "idx": 1162,
+      "question": "Q. If I could just follow up on a related matter: Mr. President, are you prepared to impose limits on intelligence-sharing with Britain if they do not put in place some restrictions on Huawei?",
+      "answer": "No, because we're going to have absolutely an agreement on Huawei and everything else. We have an incredible intelligence relationship, and we will be able to work out any differences. I think we're not going to have it. We did discuss it. I see absolutely no limitations. We've never had limitations. This is a truly great ally and partner, and we'll have no problem with that. Okay?. Thank you. Francis.",
+      "true_label": "Ambivalent",
+      "pred_label": "Clear Reply",
+      "confidence": 0.5976466001349416,
+      "president": "Donald J. Trump"
+    },
+    {
+      "idx": 785,
+      "question": "Q. I just wanted to—Ruth Bader Ginsburg was hospitalized today with an infection. I wanted to know if you had any reaction to that news?",
+      "answer": "No, I wish her the best. I hope she's better. I didn't hear that, actually. She was just hospitalized? No, that's too bad. No, I wish her the best.",
+      "true_label": "Clear Non-Reply",
+      "pred_label": "Clear Reply",
+      "confidence": 0.579218554081757,
+      "president": "Donald J. Trump"
+    },
+    {
+      "idx": 1664,
+      "question": "Q. And, President Quang, if I could ask a question of you. There are some people who believe that Vietnam could make an effective facilitator in bringing the United States and North Korea together to at least lay the groundwork, potentially, for negotiations. What do you believe Vietnam could bring to the table in that regard?",
+      "answer": "On issue, Vietnam is committed to seriously observing all the relevant resolutions of the UNSC, and we support the denuclearization of the Korean Peninsula. And we'll do our utmost and do whatever we can to contribute to the denuclearization of the Korean Peninsula.Thank you.",
+      "true_label": "Clear Reply",
+      "pred_label": "Ambivalent",
+      "confidence": 0.5723297398861058,
+      "president": "Donald J. Trump"
+    },
+    {
+      "idx": 1874,
+      "question": "Q. President Obama, the Trans-Pacific Partnership seems fairly stalled in Congress, and other countries are looking to follow the U.S. lead in terms of how they advance their approval of the agreement. With the deals today announced for Boeing and GE and your visit here to Vietnam, are you looking to change your strategy in how you seek approval for the Trans-Pacific Partnership in Congress? And d",
+      "answer": "So, first of ll, on TPP, Angel, I hven't been round s long s Sentors Crper or Secretry Kerry, but I've spent enough tie in the Sente to know tht every trde del is pinful, becuse folks re lwys seeing if they cn get n even better del. And especilly when you hve ultiple prties involved, folks re going to be scrutinizing it, they're going to be debting it, nd in n election yer, you cn nticipte tht soe folks re going to try to score politicl points off it.Hving sid tht, I rein confident we're going t",
+      "true_label": "Clear Non-Reply",
+      "pred_label": "Ambivalent",
+      "confidence": 0.5691337570871895,
+      "president": "Barack Obama"
+    },
+    {
+      "idx": 3152,
+      "question": "Q. Mr. President, you're facing a rebellion from Republican—key Republican Senators who want you to change course and begin reducing the U.S. combat role. Given the mixed report that you present today, how do you persuade Republicans to stick with you as they look ahead to the next elections?",
+      "answer": "A couple of things—first of all, I respect those Republicans that you're referring to. I presume you're referring to friends of mine, like Lugar—or Senator Lugar, Domenici, yes. These are good, honorable people. I've spoken to them, and I listen very carefully to what they have to say.First of all, they share my concern that a precipitous withdrawal would embolden Al Qaida. And they also understand that we can't let Al Qaida gain safe haven inside of Iraq. I appreciate their calls, and I appreci",
+      "true_label": "Clear Reply",
+      "pred_label": "Ambivalent",
+      "confidence": 0.5664232666166357,
+      "president": "George W. Bush"
+    },
+    {
+      "idx": 1365,
+      "question": "Q. The peace process is over?",
+      "answer": "Who?",
+      "true_label": "Ambivalent",
+      "pred_label": "Clear Non-Reply",
+      "confidence": 0.5644934915084133,
+      "president": "Donald J. Trump"
+    },
+    {
+      "idx": 177,
+      "question": "Q. You do not believe that?And to clarify, on chemical weapons: Could—if chemical weapons were used in Ukraine, would that trigger a military response from NATO?",
+      "answer": "It would trigger a response in kind, whether or not—you're asking whether NATO would cross; we'd make that decision at the time.U.S. Humanitarian Assistance to",
+      "true_label": "Clear Non-Reply",
+      "pred_label": "Clear Reply",
+      "confidence": 0.5613858496290679,
+      "president": "Joseph R. Biden"
+    },
+    {
+      "idx": 317,
+      "question": "Q. Thank you, Mr. President. I also have two questions about Vladimir Putin. The first is: Have any of the world leaders you've met with this week expressed concern that by meeting with President Putin this early in your Presidency, that it will look like you're rewarding him?",
+      "answer": "What's your second question?",
+      "true_label": "Ambivalent",
+      "pred_label": "Clear Non-Reply",
+      "confidence": 0.5602666186513241,
+      "president": "Joseph R. Biden"
+    },
+    {
+      "idx": 3070,
+      "question": "Q. And he said—well, at least the quote said that. And he also said, quote, he sees no evidence to suggest Iran wants to build a nuclear bomb. Were you disappointed with that message? And does that indicate possibly that international pressure is not as great as you once thought against Iran abandoning its nuclear program?",
+      "answer": "I—as I say, I look forward to—if those are, in fact, his comments, I look forward to having him clarify those, because when I visited with him, he understands that it's in the world's interest to make sure that does not have the capacity to make a nuclear weapon. And that's why on—in the first round at the U.N., he joined us, and second round, we joined together to send a message. I mean, if he wasn't concerned about it, Bret, then why did we have such good progress at the United Nations in roun",
+      "true_label": "Clear Non-Reply",
+      "pred_label": "Ambivalent",
+      "confidence": 0.5453126226991584,
+      "president": "George W. Bush"
+    },
+    {
+      "idx": 404,
+      "question": "Q. Do you have a response to the Governor of Missouri testing positive for coronavirus?",
+      "answer": "I didn't know that. No.Yes, John [John Roberts, Fox News], please.",
+      "true_label": "Clear Reply",
+      "pred_label": "Clear Non-Reply",
+      "confidence": 0.5083038697025297,
+      "president": "Donald J. Trump"
+    },
+    {
+      "idx": 408,
+      "question": "Q. Mr. President, just one more question, if I can, on Breonna Taylor?",
+      "answer": "So I'll let you take over.",
+      "true_label": "Clear Reply",
+      "pred_label": "Clear Non-Reply",
+      "confidence": 0.4710435305594899,
+      "president": "Donald J. Trump"
+    }
+  ],
+  "t2_errors": [
+    {
+      "idx": 1138,
+      "question": "Q. Okay. And another question on the big picture of U.S.-China relations: What do you think the U.S. and China should see each other? Are we strategic partners? Are we competitors? Are we enemies? What are we?",
+      "answer": "No. I think we're going to be strategic partners.",
+      "true_label": "Implicit",
+      "pred_label": "Explicit",
+      "confidence": 0.9701484472233278,
+      "president": "Donald J. Trump"
+    },
+    {
+      "idx": 1696,
+      "question": "Q. General Kelly said on—just last week that you believe that Cuba could stop the attacks against Americans. Do you believe them, that Cuba is—do you believe Cuba is responsible?",
+      "answer": "I do. I think Cuba knew about it, sure. I do believe Cuba is responsible. I do believe that. And it's a very unusual attack, as you know, but I do believe Cuba is responsible, yes.",
+      "true_label": "Dodging",
+      "pred_label": "Explicit",
+      "confidence": 0.969726670162312,
+      "president": "Donald J. Trump"
+    },
+    {
+      "idx": 3015,
+      "question": "Q. Mr. President, regarding the issues of rockets and settlements that you mentioned before, what should—what could Israel do regarding the ever-growing threat from Gaza? And regarding the settlements, did you get any new assurances from the Prime Minister regarding the removal of illegal outposts? Do you believe that this time it will be implemented? Do you care about it?",
+      "answer": "Yes.[]",
+      "true_label": "General",
+      "pred_label": "Explicit",
+      "confidence": 0.9586658875002082,
+      "president": "George W. Bush"
+    },
+    {
+      "idx": 785,
+      "question": "Q. I just wanted to—Ruth Bader Ginsburg was hospitalized today with an infection. I wanted to know if you had any reaction to that news?",
+      "answer": "No, I wish her the best. I hope she's better. I didn't hear that, actually. She was just hospitalized? No, that's too bad. No, I wish her the best.",
+      "true_label": "Claims ignorance",
+      "pred_label": "Explicit",
+      "confidence": 0.9402458978505138,
+      "president": "Donald J. Trump"
+    },
+    {
+      "idx": 52,
+      "question": "Q. And, Mr. President, on the debt limit, you said already, I've done——  Q. Can you speak to your experience—— Q. I've done my part. Do you think that if there is a breach, nobody is going to blame you?",
+      "answer": "Of course, no one would blame me. I know you won't. You'll be saying, Biden did a wonderful job. [] I know you.",
+      "true_label": "Deflection",
+      "pred_label": "Explicit",
+      "confidence": 0.931471922100615,
+      "president": "Joseph R. Biden"
+    },
+    {
+      "idx": 3392,
+      "question": "Q. Thank you, Mr. President. Last week, you told us that Secretary Rumsfeld will be staying on. Why is the timing right now for this, and how much does it have to do with the election results?",
+      "answer": "Right. No, you and Hunt and Keil [Richard Keil, Bloomberg News] came in the Oval Office, and Hunt asked me the question one week before the campaign, and basically it was, Are you going to do something about Rumsfeld and the Vice President? And my answer was, they're going to stay on. And the reason why is, I didn't want to inject a major decision about this war in the final days of a campaign. And so the only way to answer that question and to get you on to another question was to give you that",
+      "true_label": "Partial/half-answer",
+      "pred_label": "Explicit",
+      "confidence": 0.9138498398493076,
+      "president": "George W. Bush"
+    },
+    {
+      "idx": 145,
+      "question": "Q. And what, in your view, happened? Do you think he backed off because of that—of your statement?",
+      "answer": "No, no, I'm just saying. I just—I just found it interesting that, Biden is being apoc—Biden is being extremist. And it turns out, you all are writing about it now. Kind of fascinating.",
+      "true_label": "General",
+      "pred_label": "Dodging",
+      "confidence": 0.8957742494969272,
+      "president": "Joseph R. Biden"
+    },
+    {
+      "idx": 684,
+      "question": "Q. So why are you setting a—why are you setting such a bad example, Mr. President, for the country?",
+      "answer": "Yes. You're wrong on that, because it's a political activity. They have exceptions. Political activity.",
+      "true_label": "Partial/half-answer",
+      "pred_label": "Dodging",
+      "confidence": 0.8848302000829006,
+      "president": "Donald J. Trump"
+    },
+    {
+      "idx": 10,
+      "question": "Q. What did you talk about with him?",
+      "answer": "We talked about what we talked about at the conference overall. We talked about stability. We talked about making sure that the Third Worldtheexcuse meThird Worldthe Southern Hemisphere had access to change, it had accessweit wasn't confrontational at all. He came up to me. He said[inaudible]. Thankthank you, everybody. The President. Thank This ends the press conference. Thanks, everyone. The President. Thank you. Thank you.[]",
+      "true_label": "Declining to answer",
+      "pred_label": "Explicit",
+      "confidence": 0.8586526404267031,
+      "president": "Joseph R. Biden"
+    },
+    {
+      "idx": 957,
+      "question": "Q. I just wanted to follow up on my colleague's question about Russian interference. Can you pledge to the American people that you will not accept any foreign assistance in the upcoming election?And on this idea of a purge in your administration, there was recently the departure of your Acting DNI, Joseph Maguire. You replaced him with your Ambassador to Germany, Rick Grenell. Some of your critic",
+      "answer": "Okay, first of all, I want no help from any country. And I haven't been given help from any country.And if you see what CNN, your wonderful network, said—[]—I guess they apologized, in a way, for—didn't they apologize for the fact that they said certain things that weren't true? Tell me, what was their apology yesterday? What did they say?",
+      "true_label": "Deflection",
+      "pred_label": "Dodging",
+      "confidence": 0.8516950860222705,
+      "president": "Donald J. Trump"
+    },
+    {
+      "idx": 3056,
+      "question": "Q. There's a report today from Israel Army Radio indicating that the Syrians have confirmed that the Israelis struck a nuclear site in their country. You wouldn't comment on that before, and I'm wondering if now, on the general question, you think it's appropriate for Israel to take such action if it feels that the—there is mortal danger being posed to the state?",
+      "answer": "David, my position hadn't changed.",
+      "true_label": "Implicit",
+      "pred_label": "Dodging",
+      "confidence": 0.8484815695854946,
+      "president": "George W. Bush"
+    },
+    {
+      "idx": 1365,
+      "question": "Q. The peace process is over?",
+      "answer": "Who?",
+      "true_label": "Dodging",
+      "pred_label": "Clarification",
+      "confidence": 0.8234744067912395,
+      "president": "Donald J. Trump"
+    },
+    {
+      "idx": 429,
+      "question": "Q. And what about the payment?",
+      "answer": "The what?",
+      "true_label": "Claims ignorance",
+      "pred_label": "Clarification",
+      "confidence": 0.8097800765473138,
+      "president": "Donald J. Trump"
+    },
+    {
+      "idx": 1237,
+      "question": "Q. Okay. [Laughter] Q. Both?",
+      "answer": "Or both. Are you together? Go ahead.",
+      "true_label": "Clarification",
+      "pred_label": "Explicit",
+      "confidence": 0.8037583806041313,
+      "president": "Donald J. Trump"
+    },
+    {
+      "idx": 2537,
+      "question": "Q. Thank you, Mr. President, Prime Minister.Mr. President, as--after a difficult and violent summer in Kashmir, perhaps the chief flashpoint between your chief ally in the Afghanistan war and India, could you explain your administration's policy towards Kashmir and what role the United States might play in resolving that crisis? And if I might, could you please--this morning you called India a wor",
+      "answer": "With respect to Kashmir, obviously, this is a longstanding dispute between India and Pakistan. As I said yesterday, I believe that both Pakistan and India have an interest in reducing tensions between the two countries. The United States cannot impose a solution to these problems, but I've indicated to Prime Minister Singh that we are happy to play any role that the parties think is appropriate in reducing these tensions. That's in the interests of the region, it's in the interests of the two co",
+      "true_label": "Explicit",
+      "pred_label": "Dodging",
+      "confidence": 0.8005822856101936,
+      "president": "Barack Obama"
+    }
+  ]
+}

@@ -1,4 +1,8 @@
-# Python
+# =======================================================================
+# .gitignore — PFW at SemEval-2026 Task 6
+# =======================================================================
+
+# --- Python ------------------------------------------------------------
 __pycache__/
 *.pyc
 *.pyo
@@ -6,11 +10,11 @@ __pycache__/
 *.egg-info/
 .venv/
 
-# Caches
+# --- Caches ------------------------------------------------------------
 .cache/
 hf_cache/
 
-# Training outputs (large)
+# --- Training outputs (large) -----------------------------------------
 /runs/
 /models/
 /checkpoints/
@@ -19,28 +23,51 @@ hf_cache/
 *.ckpt
 *.safetensors
 
-# Artifacts (OOF logits, splits, etc.)
+# --- Artifacts (OOF logits, splits, etc.) -----------------------------
 /artifacts/
 
-# Logs
+# --- Logs --------------------------------------------------------------
 /logs/
 *.log
+texput.log
 
-# Submissions
+# --- Submissions (task outputs) ---------------------------------------
 /submissions/
+eval_solution.zip
+/task1_eval_solution/
+/task2_eval_solution/
 
-# Data files
+# --- Raw data (subject to dataset license) ----------------------------
 /data/
-*.csv
+clarity_task_evaluation_dataset.csv
 *.jsonl
 *.parquet
 *.npy
 
-# Large / binary
-*.pdf
-*.zip
+# CSVs excluded by default; allow the small paper-figure tables
+*.csv
+!docs/paper_figures/*.csv
 
-# OS / editor
+# --- Binary / large files ---------------------------------------------
+*.zip
+# Ignore top-level PDFs (e.g., external references) but keep the paper
+# and the camera-ready figure PDFs.
+/*.pdf
+!latex/acl_latex.pdf
+!docs/paper_figures/*.pdf
+
+# --- Internal / in-progress documentation -----------------------------
+# These are working notes that lived in the repo during development;
+# the public documentation lives in README.md + docs/methodology_report.md.
+docs/advisor_commands.md
+docs/advisor_update.md
+docs/baseline_registry.md
+docs/gold_submissions.json
+docs/M7_QUICK_START.md
+docs/M7_strategic_plan.md
+docs/paper_outline.md
+
+# --- OS / editor -------------------------------------------------------
 .vscode/
 .idea/
 .DS_Store
@@ -48,15 +75,15 @@ hf_cache/
 *.swo
 *~
 
-# Jupyter
+# --- Jupyter -----------------------------------------------------------
 .ipynb_checkpoints/
 *.ipynb
 
-# Environment
+# --- Environment -------------------------------------------------------
 .env
 .env.local
 
-# LaTeX build artifacts
+# --- LaTeX build artifacts --------------------------------------------
 latex/*.aux
 latex/*.bbl
 latex/*.blg
@@ -65,3 +92,8 @@ latex/*.fls
 latex/*.out
 latex/*.synctex.gz
 latex/*.bak
+latex/compile_log.txt
+latex/errors-acl.json
+
+# --- Editor / IDE config used during development ----------------------
+.github/copilot-instructions.md

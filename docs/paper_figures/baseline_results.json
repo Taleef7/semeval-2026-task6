@@ -1,0 +1,88 @@
+{
+  "t1_majority_f1": 0.2478134110787172,
+  "t1_tfidf_lr_f1": 0.5457545261187701,
+  "t1_deberta_xl_single_mean_f1": 0.3109,
+  "t1_deberta_xl_ensemble_oof_f1": 0.6794,
+  "t1_deberta_xl_ensemble_eval_f1": 0.76,
+  "t2_majority_f1": 0.05195061728395062,
+  "t2_tfidf_lr_f1": 0.31864890055531897,
+  "t2_deberta_v3_single_mean_f1": 0.3273,
+  "t2_deberta_v3_ensemble_oof_f1": 0.3727,
+  "t2_deberta_v3_ensemble_eval_f1": 0.5,
+  "t1_lr_per_class": {
+    "Clear Reply": {
+      "precision": 0.693423096841015,
+      "recall": 0.6563725490196078,
+      "f1-score": 0.6743893225887686,
+      "support": 2040.0
+    },
+    "Ambivalent": {
+      "precision": 0.44779582366589327,
+      "recall": 0.5421348314606742,
+      "f1-score": 0.49047013977128334,
+      "support": 356.0
+    },
+    "Clear Non-Reply": {
+      "precision": 0.46500920810313073,
+      "recall": 0.48003802281368824,
+      "f1-score": 0.4724041159962582,
+      "support": 1052.0
+    }
+  },
+  "t2_lr_per_class": {
+    "Claims ignorance": {
+      "precision": 0.3284671532846715,
+      "recall": 0.37815126050420167,
+      "f1-score": 0.3515625,
+      "support": 119.0
+    },
+    "Clarification": {
+      "precision": 0.4462809917355372,
+      "recall": 0.5869565217391305,
+      "f1-score": 0.5070422535211268,
+      "support": 92.0
+    },
+    "Declining to answer": {
+      "precision": 0.4503311258278146,
+      "recall": 0.4689655172413793,
+      "f1-score": 0.4594594594594595,
+      "support": 145.0
+    },
+    "Deflection": {
+      "precision": 0.21739130434782608,
+      "recall": 0.30183727034120733,
+      "f1-score": 0.25274725274725274,
+      "support": 381.0
+    },
+    "Dodging": {
+      "precision": 0.38639876352395675,
+      "recall": 0.35410764872521244,
+      "f1-score": 0.36954915003695493,
+      "support": 706.0
+    },
+    "Explicit": {
+      "precision": 0.47522236340533675,
+      "recall": 0.35551330798479086,
+      "f1-score": 0.4067427949972811,
+      "support": 1052.0
+    },
+    "General": {
+      "precision": 0.2116788321167883,
+      "recall": 0.22538860103626943,
+      "f1-score": 0.21831869510664995,
+      "support": 386.0
+    },
+    "Implicit": {
+      "precision": 0.20418848167539266,
+      "recall": 0.23975409836065573,
+      "f1-score": 0.22054665409990576,
+      "support": 488.0
+    },
+    "Partial/half-answer": {
+      "precision": 0.07608695652173914,
+      "recall": 0.08860759493670886,
+      "f1-score": 0.08187134502923976,
+      "support": 79.0
+    }
+  }
+}
